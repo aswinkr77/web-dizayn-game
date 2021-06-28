@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Sen:wght@800&display=swap');
+
+$Sen: 'Sen', sans-serif;
+$Roboto: 'Roboto', sans-serif;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    background: url("../assets/images/bgm.png") no-repeat center;
+    background-size: cover;
+}
+
+div.heading {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    height: 9.5rem;
+    h1 {
+        width: fit-content;
+        color: white;
+        font-family: $Sen;
+        font-size: 4.5rem;
+        font-weight: 800;
+    }
+
+    h4 {
+        width: fit-content;
+        color: rgba(255, 255, 255, 0.6);
+        font-family: $Roboto;
+        font-weight: 700;
+        font-size: 1.5rem;
+    }
+}
+
+div#game-container {
+    position: relative;
+    width: 85%;
+    margin: 0 auto;
+    height: 375px;
+    overflow: hidden;
+
+    span#points {
+        position: relative;
+        left: calc(100% - 100px);
+        top: 20px;
+        font-family: $Roboto;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: white;
+    }
+
+    div#line-container {
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        top: 70px;
+        width: 100%;
+        height: 250px;
+        border-bottom: 3px solid white;
+
+        img {
+            &:first-child {
+                position: absolute;
+                left: 12rem;
+                opacity: 0.3;
+                width: 21.4375rem;
+                height: 12.0625rem;
+            }
+        }
+
+        img#captain-finn {
+            position: absolute;
+            width: 6.375rem;
+            height: 9.0625rem;
+            bottom: 0;
+        }
+
+        img.jump {
+            animation: jump 0.7s linear;
+        }
+
+        img#obstacles {
+            position: absolute;
+            height: 6.9375rem;
+            width: 6.9375rem;
+            bottom: 0;
+            right: -10rem;
+        }
+
+        img.obstacles-move {
+            animation: obstacles-move 1.6s infinite linear;
+        }
+    }
+}
+
+div.game-over {
+    display: none;
+    height: 6rem;
+    justify-content: center;
+    align-items: center;
+    h2 {
+        font-family: $Roboto;
+        font-size: 2.25rem;
+        color: white;
+        margin-right: 2rem;
+    }
+
+    img {
+        width: 5.3125rem;
+        height: 5.3125rem;
+    }
+}
+
+@keyframes jump {
+    0% {
+        bottom: 0;
+    }
+
+    50% {
+        bottom: 165px;
+    }
+
+    100% {
+        bottom: 0;
+    }
+}
+
+@keyframes obstacles-move {
+    0% {
+        right: -10rem;
+    }
+
+    100% {
+        right: calc(100% + 10rem);
+    }
+}
