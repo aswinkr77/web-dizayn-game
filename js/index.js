@@ -62,7 +62,7 @@ let generateObstacles = () => {
         setTimeout(removeObstaclesMotion, 1000 * 1.4);
     }
 
-    setTimeout(generateObstacles, 1000 * 1.6);
+    generateObstaclesTimer = setTimeout(generateObstacles, 1000 * 1.6);
 }
 
 // checks for captain and obstacles collided or not and also moves captain forward and changes its walking style
@@ -78,6 +78,7 @@ let collisionCheck = () => {
         obstacles.style.left = `${oLeft}px`;
         captainFinn.style.top = `${cTop}px`;
         clearInterval(collided);
+        clearTimeout(generateObstaclesTimer);
     } 
     move+=10;
     if(move%100 === 0) {
@@ -115,6 +116,7 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
+//restart game
 gameOver.addEventListener("click", () => {
     gameOver.style.display = "none";
     point.innerHTML = "0000 Pts";
@@ -123,9 +125,10 @@ gameOver.addEventListener("click", () => {
     captainFinn.style.bottom = "0";
     captainFinn.style.removeProperty("top");
     obstacles.style.removeProperty("left");
+    clearTimeout(generateObstaclesTimer);
     i = 3;
     move = 0;
     points = 0;
     start = false;
     stop = false;
-})
+});
