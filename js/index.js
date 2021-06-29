@@ -5,7 +5,7 @@ const restart = document.getElementById("restart");
 const spaceJump = document.getElementById("space");
 const point = document.getElementById("count");
 
-let start = false, stop = false, i = 3, generateObstaclesTimer, points = 0, cTop, cRight, cLeft, oRight, oLeft, move = 0, collided;
+let start = false, stop = false, i = 3, generateObstaclesTimer, points = 0, cTop, cBottom, cRight, cLeft, oRight, oLeft, move = 0, collided;
 
 // points counter
 let pointsCounter = () => {
@@ -68,6 +68,7 @@ let generateObstacles = () => {
 // checks for captain and obstacles collided or not and also moves captain forward and changes its walking style
 let collisionCheck = () => {
     cTop = parseInt(getComputedStyle(captainFinn).top);
+    cBottom = parseInt(getComputedStyle(captainFinn).bottom);
     cLeft = parseInt(getComputedStyle(captainFinn).left);
     oLeft = parseInt(getComputedStyle(obstacles).left);
 
@@ -86,8 +87,10 @@ let collisionCheck = () => {
             i = 1
         
         captainFinn.style.left = `${(move/1000) * 5 + 1}px`;
-        captainFinn.src = `../assets/images/captain finn/${i}.png`;
-        i += 2;
+        if(cBottom === 0) {
+            captainFinn.src = `../assets/images/captain finn/${i}.png`;
+            i += 2;
+        }
     }
 }
 
@@ -123,6 +126,7 @@ gameOver.addEventListener("click", () => {
     spaceJump.style.visibility = "visible";
     captainFinn.style.left = "0";
     captainFinn.style.bottom = "0";
+    captainFinn.src = "../assets/images/captain finn/1.png"
     captainFinn.style.removeProperty("top");
     obstacles.style.removeProperty("left");
     clearTimeout(generateObstaclesTimer);

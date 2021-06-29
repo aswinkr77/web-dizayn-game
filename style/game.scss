@@ -132,6 +132,31 @@ div.game-over {
     }
 }
 
+div#cannot-play {
+    display: none;
+}
+
+@media screen and (max-width: 992px) {
+    div.container {
+        display: none;
+    }
+
+    div#cannot-play {
+        display: block;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        margin: 0 1rem;
+        text-align: center;
+        font-family: $Sen;
+        font-size: 0.8rem;
+        color: white;
+        span {
+            font-family: $Sen;
+        }
+    }
+}
+
 @keyframes jump {
     0% {
         bottom: 0;
