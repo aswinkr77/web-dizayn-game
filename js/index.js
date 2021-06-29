@@ -4,8 +4,9 @@ const gameOver = document.getElementById("game-over");
 const restart = document.getElementById("restart");
 const spaceJump = document.getElementById("space");
 
-let start = false, stop = false, i = 3;;
+let start = false, stop = false, i = 3, generateObstaclesTimer;
 
+// remove jump ability of captain finn and also set gameover captain finn
 let removeJump = () => {
     captainFinn.classList.remove("jump");
     if(stop) 
@@ -16,6 +17,7 @@ let removeJump = () => {
     }
 }
 
+// add jump ability to captain and also set jump image of captain finn
 let jump = () => {
     if (captainFinn.classList != "jump") {
         captainFinn.classList.add("jump");
@@ -23,18 +25,39 @@ let jump = () => {
         setTimeout(removeJump, 1000 * 0.7);
     }
 
-    setTimeout(() => {
+    /*setTimeout(() => {
         if(obstacles.classList != "obstacles-move") {
             obstacles.classList.add("obstacles-move")
         }
-    }, 1);
+    }, 10);*/
 }
 
-let restartGame = () => {
-
+// remove obstacles motion
+let removeObstaclesMotion = () => {
+    obstacles.classList.remove("obstacles-move");
+    console.log("removed");
 }
 
-let cTop, cRight, cLeft, oRight, oLeft, move = 0;
+// add motion to obstacles and also generate any of the three obstacles
+let generateObstacles = () => {
+    let randInt;
+    if(obstacles.classList != "obstacles-move" && !stop) {
+        randInt = Math.floor(Math.random() * (3 - 1 + 1) + 1);
+        console.log(randInt);
+        obstacles.src = `../assets/images/obstacles/${randInt}.png`;
+        obstacles.classList.add("obstacles-move");
+        setTimeout(removeObstaclesMotion, 1000 * 1.4);
+    }
+
+    setTimeout(generateObstacles, 1000 * 1.6);
+}
+
+/*let restartGame = () => {
+
+}*/
+
+// checks for captain and obstacles collided or not and also moves captain forward and changes its walking style
+let cTop, cRight, cLeft, oRight, oLeft, move = 0, collided;
 let collisionCheck = () => {
     cTop = parseInt(getComputedStyle(captainFinn).top);
     cLeft = parseInt(getComputedStyle(captainFinn).left);
@@ -59,20 +82,25 @@ let collisionCheck = () => {
     }
 }
 
-let collided = setInterval(collisionCheck, 10);
-
+// checks for space key is pressed or not and if pressed starts the game
 document.addEventListener("keydown", (event) => {
     if(event.key !== undefined && event.key === " " && !stop) {
         jump();
         if(!start) {
+            setTimeout(generateObstacles, 2000);
+            //generateObstacles();
             spaceJump.style.visibility = "hidden";
+            collided = setInterval(collisionCheck, 10);
         }
 
         start = true;
     } else if(event.keyCode !== undefined && event.keyCode === 32 && !stop) {
         jump();
         if(!start) {
+            setTimeout(generateObstacles, 2000);
+            //generateObstacles();
             spaceJump.style.visibility = "hidden";
+            collided = setInterval(collisionCheck, 10);
         }
 
         start = true;
