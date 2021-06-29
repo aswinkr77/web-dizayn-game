@@ -136,3 +136,6 @@ gameOver.addEventListener("click", () => {
     start = false;
     stop = false;
 });
+
+//let cTop = parseInt(getComputedStyle(captainFinn).top);
+//console.log(cTop);
