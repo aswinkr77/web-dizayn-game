@@ -65,7 +65,6 @@ document.addEventListener("keydown", (event) => {
     if(event.key !== undefined && event.key === " " && !stop) {
         jump();
         if(!start) {
-            changeCaptain();
             spaceJump.style.visibility = "hidden";
         }
 
@@ -73,7 +72,6 @@ document.addEventListener("keydown", (event) => {
     } else if(event.keyCode !== undefined && event.keyCode === 32 && !stop) {
         jump();
         if(!start) {
-            changeCaptain();
             spaceJump.style.visibility = "hidden";
         }
 
