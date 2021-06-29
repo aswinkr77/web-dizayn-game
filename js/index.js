@@ -31,9 +31,9 @@ let pointsCounter = () => {
 let removeJump = () => {
     captainFinn.classList.remove("jump");
     if(stop) 
-        captainFinn.src = "../assets/images/captain finn/6.png";
+        captainFinn.src = "assets/images/captain finn/6.png";
     else {
-        captainFinn.src = "../assets/images/captain finn/1.png";
+        captainFinn.src = "assets/images/captain finn/1.png";
         i = 3;
     }
 }
@@ -42,7 +42,7 @@ let removeJump = () => {
 let jump = () => {
     if (captainFinn.classList != "jump") {
         captainFinn.classList.add("jump");
-        captainFinn.src = "../assets/images/captain finn/2.png"
+        captainFinn.src = "assets/images/captain finn/2.png"
         setTimeout(removeJump, 1000 * 0.7);
     }
 }
@@ -57,7 +57,7 @@ let generateObstacles = () => {
     let randInt;
     if(obstacles.classList != "obstacles-move" && !stop) {
         randInt = Math.floor(Math.random() * 3 + 1);
-        obstacles.src = `../assets/images/obstacles/${randInt}.png`;
+        obstacles.src = `assets/images/obstacles/${randInt}.png`;
         obstacles.classList.add("obstacles-move");
         setTimeout(removeObstaclesMotion, 1000 * 1.4);
     }
@@ -88,7 +88,7 @@ let collisionCheck = () => {
         
         captainFinn.style.left = `${(move/1000) * 5 + 1}px`;
         if(cBottom === 0) {
-            captainFinn.src = `../assets/images/captain finn/${i}.png`;
+            captainFinn.src = `assets/images/captain finn/${i}.png`;
             i += 2;
         }
     }
@@ -126,7 +126,7 @@ gameOver.addEventListener("click", () => {
     spaceJump.style.visibility = "visible";
     captainFinn.style.left = "0";
     captainFinn.style.bottom = "0";
-    captainFinn.src = "../assets/images/captain finn/1.png"
+    captainFinn.src = "assets/images/captain finn/1.png"
     captainFinn.style.removeProperty("top");
     obstacles.style.removeProperty("left");
     clearTimeout(generateObstaclesTimer);
