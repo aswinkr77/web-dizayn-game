@@ -3,8 +3,29 @@ const obstacles = document.getElementById("obstacles");
 const gameOver = document.getElementById("game-over");
 const restart = document.getElementById("restart");
 const spaceJump = document.getElementById("space");
+const point = document.getElementById("count");
 
-let start = false, stop = false, i = 3, generateObstaclesTimer;
+let start = false, stop = false, i = 3, generateObstaclesTimer, points = 0, cTop, cRight, cLeft, oRight, oLeft, move = 0, collided;
+
+// points counter
+let pointsCounter = () => {
+    if(!stop) {
+        ++points;
+
+        if(points < 10) 
+            point.innerHTML = `000${points} Pts`;
+        else if(points < 100)
+            point.innerHTML = `00${points} Pts`;
+        else if(points < 1000)
+            point.innerHTML = `0${points} Pts`;
+        else if(points < 9999999999)
+            point.innerHTML = `${points} Pts`;
+        else
+            point.innerHTML = "9999999999 Pts"; //maximum points condition
+
+        setTimeout(pointsCounter, 100);
+    }
+}
 
 // remove jump ability of captain finn and also set gameover captain finn
 let removeJump = () => {
@@ -24,26 +45,18 @@ let jump = () => {
         captainFinn.src = "../assets/images/captain finn/2.png"
         setTimeout(removeJump, 1000 * 0.7);
     }
-
-    /*setTimeout(() => {
-        if(obstacles.classList != "obstacles-move") {
-            obstacles.classList.add("obstacles-move")
-        }
-    }, 10);*/
 }
 
 // remove obstacles motion
 let removeObstaclesMotion = () => {
     obstacles.classList.remove("obstacles-move");
-    console.log("removed");
 }
 
 // add motion to obstacles and also generate any of the three obstacles
 let generateObstacles = () => {
     let randInt;
     if(obstacles.classList != "obstacles-move" && !stop) {
-        randInt = Math.floor(Math.random() * (3 - 1 + 1) + 1);
-        console.log(randInt);
+        randInt = Math.floor(Math.random() * 3 + 1);
         obstacles.src = `../assets/images/obstacles/${randInt}.png`;
         obstacles.classList.add("obstacles-move");
         setTimeout(removeObstaclesMotion, 1000 * 1.4);
@@ -52,12 +65,7 @@ let generateObstacles = () => {
     setTimeout(generateObstacles, 1000 * 1.6);
 }
 
-/*let restartGame = () => {
-
-}*/
-
 // checks for captain and obstacles collided or not and also moves captain forward and changes its walking style
-let cTop, cRight, cLeft, oRight, oLeft, move = 0, collided;
 let collisionCheck = () => {
     cTop = parseInt(getComputedStyle(captainFinn).top);
     cLeft = parseInt(getComputedStyle(captainFinn).left);
@@ -72,7 +80,7 @@ let collisionCheck = () => {
         clearInterval(collided);
     } 
     move+=10;
-    if(move%1000 === 0) {
+    if(move%100 === 0) {
         if(i > 7)
             i = 1
         
@@ -88,7 +96,7 @@ document.addEventListener("keydown", (event) => {
         jump();
         if(!start) {
             setTimeout(generateObstacles, 2000);
-            //generateObstacles();
+            pointsCounter();
             spaceJump.style.visibility = "hidden";
             collided = setInterval(collisionCheck, 10);
         }
@@ -98,7 +106,7 @@ document.addEventListener("keydown", (event) => {
         jump();
         if(!start) {
             setTimeout(generateObstacles, 2000);
-            //generateObstacles();
+            pointsCounter();
             spaceJump.style.visibility = "hidden";
             collided = setInterval(collisionCheck, 10);
         }
@@ -106,3 +114,18 @@ document.addEventListener("keydown", (event) => {
         start = true;
     }
 });
+
+gameOver.addEventListener("click", () => {
+    gameOver.style.display = "none";
+    point.innerHTML = "0000 Pts";
+    spaceJump.style.visibility = "visible";
+    captainFinn.style.left = "0";
+    captainFinn.style.bottom = "0";
+    captainFinn.style.removeProperty("top");
+    obstacles.style.removeProperty("left");
+    i = 3;
+    move = 0;
+    points = 0;
+    start = false;
+    stop = false;
+})

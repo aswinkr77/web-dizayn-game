@@ -51,14 +51,20 @@ div#game-container {
     height: 375px;
     overflow: hidden;
 
-    span#points {
+    div#points {
         position: relative;
-        left: calc(100% - 100px);
+        width: 100%;
+        height: 1.6rem;
         top: 20px;
         font-family: $Roboto;
         font-weight: 700;
         font-size: 1.5rem;
         color: white;
+        span {
+            position: absolute;
+            right: 0;
+            width: fit-content;
+        }
     }
 
     div#line-container {
@@ -120,6 +126,9 @@ div.game-over {
     img {
         width: 5.3125rem;
         height: 5.3125rem;
+        &:hover {
+            cursor: pointer;
+        }
     }
 }
 
