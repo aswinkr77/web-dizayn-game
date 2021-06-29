@@ -76,14 +76,16 @@ div#game-container {
         height: 250px;
         border-bottom: 3px solid white;
 
-        img {
-            &:first-child {
-                position: absolute;
-                left: 12rem;
-                opacity: 0.3;
-                width: 21.4375rem;
-                height: 12.0625rem;
-            }
+        img#word-cloud {
+            position: absolute;
+            opacity: 0.3;
+            width: 21.4375rem;
+            height: 12.0625rem;
+            right: -20rem;
+        }
+
+        img.cloud {
+            animation: cloud 17s linear infinite;
         }
 
         img#captain-finn {
@@ -178,5 +180,15 @@ div#cannot-play {
 
     100% {
         right: calc(100% + 10rem);
+    }
+}
+
+@keyframes cloud {
+    0% {
+        right: -20rem;
+    }
+
+    100% {
+        right: calc(100% + 20rem);
     }
 }

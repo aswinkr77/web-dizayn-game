@@ -4,6 +4,7 @@ const gameOver = document.getElementById("game-over");
 const restart = document.getElementById("restart");
 const spaceJump = document.getElementById("space");
 const point = document.getElementById("count");
+const wordCloud = document.getElementById("word-cloud");
 
 let start = false, stop = false, i = 3, generateObstaclesTimer, points = 0, cTop, cBottom, cRight, cLeft, oRight, oLeft, move = 0, collided;
 
@@ -36,6 +37,17 @@ let removeJump = () => {
         captainFinn.src = "assets/images/captain finn/1.png";
         i = 3;
     }
+}
+
+//add cloud animation
+let cloudAnimation = () => {
+    if(wordCloud.classList != "cloud")
+        wordCloud.classList.add("cloud");
+}
+
+//remove cloud animation
+let removeCloudAnimation = () => {
+    wordCloud.classList.remove("cloud");
 }
 
 // add jump ability to captain and also set jump image of captain finn
@@ -78,6 +90,8 @@ let collisionCheck = () => {
         obstacles.classList.remove("obstacles-move");
         obstacles.style.left = `${oLeft}px`;
         captainFinn.style.top = `${cTop}px`;
+        wordCloud.style.left = `${parseInt(getComputedStyle(wordCloud).left)}px`;
+        removeCloudAnimation();
         clearInterval(collided);
         clearTimeout(generateObstaclesTimer);
     } 
@@ -103,6 +117,7 @@ document.addEventListener("keydown", (event) => {
             pointsCounter();
             spaceJump.style.visibility = "hidden";
             collided = setInterval(collisionCheck, 10);
+            cloudAnimation();
         }
 
         start = true;
@@ -113,6 +128,7 @@ document.addEventListener("keydown", (event) => {
             pointsCounter();
             spaceJump.style.visibility = "hidden";
             collided = setInterval(collisionCheck, 10);
+            cloudAnimation();
         }
 
         start = true;
@@ -129,6 +145,7 @@ gameOver.addEventListener("click", () => {
     captainFinn.src = "assets/images/captain finn/1.png"
     captainFinn.style.removeProperty("top");
     obstacles.style.removeProperty("left");
+    wordCloud.style.removeProperty("left");
     clearTimeout(generateObstaclesTimer);
     i = 3;
     move = 0;
@@ -136,6 +153,3 @@ gameOver.addEventListener("click", () => {
     start = false;
     stop = false;
 });
-
-//let cTop = parseInt(getComputedStyle(captainFinn).top);
-//console.log(cTop);
