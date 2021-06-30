@@ -92,21 +92,21 @@ let collisionCheck = () => {
         removeCloudAnimation();
         clearInterval(collided);
         clearTimeout(generateObstaclesTimer);
-    } 
+    } else {
+        move += 10;
+        if(move % 100 === 0) {
+            if(i > 7)
+                i = 1;
 
-    move += 10;
-    if(move % 100 === 0) {
-        if(i > 7)
-            i = 1;
+            if(!(cRight <= 380)) //pauses captain finn at 380px from the right
+                captainFinn.style.left = `${(move / 1000) * 5 + 1}px`; //moves captain finn forward
 
-        if(!(cRight <= 380)) //pauses captain finn at 380px from the right
-            captainFinn.style.left = `${(move / 1000) * 5 + 1}px`; //moves captain finn forward
-
-        if(cBottom === 0) { //sets different walking styles of captain finn when not jumping
-            captainFinn.src = `assets/images/captain finn/${i}.png`;
-            i += 2;
-        } else // sets jump image of captain finn 
-            captainFinn.src = "assets/images/captain finn/2.png";
+            if(cBottom === 0) { //sets different walking styles of captain finn when not jumping
+                captainFinn.src = `assets/images/captain finn/${i}.png`;
+                i += 2;
+            } else // sets jump image of captain finn 
+                captainFinn.src = "assets/images/captain finn/2.png";
+        }
     }
 }
 
