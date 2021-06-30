@@ -81,7 +81,7 @@ let collisionCheck = () => {
     cRight = parseInt(getComputedStyle(captainFinn).right);
     oLeft = parseInt(getComputedStyle(obstacles).left);
 
-    if(Math.abs(oLeft - cLeft) <= 93 && cTop >= -1) {
+    if(Math.abs(oLeft - cLeft) <= 93 && cTop >= 9) {
         stop = true;
         gameOver.style.display = "flex";
         obstacles.classList.remove("obstacles-move");

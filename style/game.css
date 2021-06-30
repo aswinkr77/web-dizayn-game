@@ -93,7 +93,7 @@ div#game-container div#line-container img#obstacles {
   position: absolute;
   height: 6.9375rem;
   width: 6.9375rem;
-  bottom: 0;
+  bottom: -10px;
   right: -10rem;
 }
 div#game-container div#line-container img.obstacles-move {
