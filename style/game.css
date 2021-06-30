@@ -132,18 +132,6 @@ div#cannot-play {
   color: white;
 }
 
-div#no-key-suppport {
-  display: none;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  margin: 0 1rem;
-  text-align: center;
-  font-family: "Sen", sans-serif;
-  font-size: 0.8rem;
-  color: white;
-}
-
 @media screen and (max-width: 992px) {
   div.container {
     display: none;

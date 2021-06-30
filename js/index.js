@@ -134,10 +134,6 @@ document.addEventListener("keydown", (event) => {
         }
 
         start = true;
-    } else {
-        document.getElementsByClassName("container")[0].style.display = "none";
-        gameOver.style.display = "none";
-        document.getElementById("no-key-support").style.display = "block";
     }
 });
 
