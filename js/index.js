@@ -6,7 +6,7 @@ const spaceJump = document.getElementById("space");
 const point = document.getElementById("count");
 const wordCloud = document.getElementById("word-cloud");
 
-let start = false, stop = false, i = 3, generateObstaclesTimer, points = 0, cTop, cBottom, cRight, cLeft, oRight, oLeft, move = 0, collided;
+let start = false, stop = false, i = 3, generateObstaclesTimer, points = 0, cTop, cBottom, cRight, cLeft, oLeft, move = 0, collided;
 
 // points counter
 let pointsCounter = () => {
@@ -82,6 +82,7 @@ let collisionCheck = () => {
     cTop = parseInt(getComputedStyle(captainFinn).top);
     cBottom = parseInt(getComputedStyle(captainFinn).bottom);
     cLeft = parseInt(getComputedStyle(captainFinn).left);
+    cRight = parseInt(getComputedStyle(captainFinn).right);
     oLeft = parseInt(getComputedStyle(obstacles).left);
 
     if(Math.abs(oLeft - cLeft) <= 93 && cTop >= -1) {
@@ -95,12 +96,15 @@ let collisionCheck = () => {
         clearInterval(collided);
         clearTimeout(generateObstaclesTimer);
     } 
-    move+=10;
-    if(move%100 === 0) {
+
+    move += 10;
+    if(move % 100 === 0) {
         if(i > 7)
-            i = 1
-        
-        captainFinn.style.left = `${(move/1000) * 5 + 1}px`;
+            i = 1;
+
+        if(!(cRight <= 380)) //pauses captain finn at 380px from the right
+            captainFinn.style.left = `${(move / 1000) * 5 + 1}px`;
+
         if(cBottom === 0) {
             captainFinn.src = `assets/images/captain finn/${i}.png`;
             i += 2;
