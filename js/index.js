@@ -96,7 +96,7 @@ let collisionCheck = () => {
         clearInterval(collided);
         clearTimeout(generateObstaclesTimer);
     } 
-
+    
     move += 10;
     if(move % 100 === 0) {
         if(i > 7)
